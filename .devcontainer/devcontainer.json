@@ -1,0 +1,57 @@
+{
+  "name": "Voice Recovery Circuit",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": ".."
+  },
+  "features": {},
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "rust-lang.rust-analyzer",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "NomicFoundation.hardhat-solidity",
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "tamasfe.even-better-toml",
+        "vadimcn.vscode-lldb"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+        "python.terminal.activateEnvironment": true,
+        "editor.formatOnSave": true,
+        "[rust]": {
+          "editor.defaultFormatter": "rust-lang.rust-analyzer"
+        },
+        "[python]": {
+          "editor.defaultFormatter": "ms-python.python"
+        },
+        "rust-analyzer.cargo.features": "all",
+        "rust-analyzer.checkOnSave.command": "clippy"
+      }
+    }
+  },
+  "postCreateCommand": "bash -c 'set -e; poetry install; cd hardhat && npm install; cd ../app && npm install'",
+  "remoteUser": "vscode",
+  "mounts": [],
+  "forwardPorts": [
+    3000,
+    8000,
+    8545
+  ],
+  "portsAttributes": {
+    "3000": {
+      "label": "React App",
+      "onAutoForward": "notify"
+    },
+    "8000": {
+      "label": "Flask Backend",
+      "onAutoForward": "notify"
+    },
+    "8545": {
+      "label": "Hardhat Node",
+      "onAutoForward": "notify"
+    }
+  }
+}
