@@ -1,16 +1,16 @@
+import { Box, Card, CardContent, Modal, TextField, Typography } from "@mui/material";
+import { ethers } from "ethers";
 import React, { useEffect, useState } from "react";
 import urlJoin from "url-join";
 import "./App.css";
 import RecordButton from "./RecordButton";
-import VoiceKeyRecovery from "./contracts/VoiceKeyRecover.sol/VoiceKeyRecover.json";
-import { Typography, Box, Card, CardContent, Modal, TextField } from "@mui/material";
-import { ethers } from "ethers";
 import RegisterStatus from "./RegisterStatus";
+import VoiceKeyRecovery from "./contracts/VoiceKeyRecover.sol/VoiceKeyRecover.json";
 import Countdown from "./countdown";
 import { countOnes } from "./util";
 
-const contractAddress = "0x5FbDB2315678afecb367f032d93F642f64180aa3";
-const apiUrl = "http://127.0.0.1:5000";
+const contractAddress = process.env.REACT_APP_CONTRACT_ADDRESS || "0x5FbDB2315678afecb367f032d93F642f64180aa3";
+const apiUrl = process.env.REACT_APP_API_URL || "http://127.0.0.1:5000";
 const threshold = 64;
 
 function App() {
